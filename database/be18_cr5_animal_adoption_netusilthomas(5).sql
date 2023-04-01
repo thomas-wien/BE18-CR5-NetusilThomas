@@ -52,18 +52,7 @@ INSERT INTO `addresses` (`id`, `user_id`, `address_line_1`, `address_line_2`, `h
 
 -- --------------------------------------------------------
 
---
--- Tabellenstruktur für Tabelle `adoptions`
---
-
-CREATE TABLE `adoptions` (
-  `id` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `fk_user_id` int(5) NOT NULL,
-  `fk_animal_id` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
--- --------------------------------------------------------
+--- --------------------------------------------------------
 
 --
 -- Tabellenstruktur für Tabelle `animal`
@@ -174,13 +163,6 @@ ALTER TABLE `addresses`
   ADD PRIMARY KEY (`id`),
   ADD KEY `client_id` (`user_id`),
   ADD KEY `user_id` (`user_id`);
-
---
--- Indizes für die Tabelle `adoptions`
---
-ALTER TABLE `adoptions`
-  ADD KEY `fk_user_id` (`fk_user_id`),
-  ADD KEY `fk_animal_id` (`fk_animal_id`);
 
 --
 -- Indizes für die Tabelle `animal`
