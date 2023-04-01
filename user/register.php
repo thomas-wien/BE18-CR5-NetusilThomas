@@ -144,7 +144,7 @@ $mysqli->close();
         <span class="text-danger"> <?php echo $passwordError; ?> </span>
         <hr />
         <span class="row my-5"><button class="btn btn-block btn-tertiary card w-25 mx-auto" type="submit" name="btn-signup">Confirm</button>
-            <a class="btn btn-block btn-tertiary card w-25" type="button" href="/user/index.php">Log in</a>
+            <a class="btn btn-block btn-tertiary card w-25" type="button" href="../user/index.php">Log in</a>
         </span>
         <hr />
     </form>

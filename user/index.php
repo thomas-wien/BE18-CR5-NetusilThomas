@@ -80,7 +80,7 @@ $mysqli->close();
         <span class="text-danger"><?php echo $passError; ?></span>
         <hr />
         <span class="row my-5"><button class="btn btn-block btn-tertiary card w-25 mx-auto" type="submit" name="btn-login">Sign In</button>
-            <a class="btn btn-block btn-tertiary card w-50" type="button" href="/user/register.php">Not registered yet? Click here</a>
+            <a class="btn btn-block btn-tertiary card w-50" type="button" href="../user/register.php">Not registered yet? Click here</a>
         </span>
         <hr />
     </form>

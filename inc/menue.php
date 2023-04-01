@@ -29,18 +29,18 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <?php if ($_SESSION["username"] != "") {
-            echo '<a class="btn btn-tertiary card" type="button" data-bs-target=".navbar-collapse.show" href="/user/home.php?">Your Account ' . $_SESSION["username"] . '</a>';
+            echo '<a class="btn btn-tertiary card" type="button" data-bs-target=".navbar-collapse.show" href="../user/home.php?">Your Account ' . $_SESSION["username"] . '</a>';
           } else {
-            echo '<a class="btn btn-tertiary card" type="button" data-bs-target=".navbar-collapse.show" href="/user/index.php">Login</a>';
+            echo '<a class="btn btn-tertiary card" type="button" data-bs-target=".navbar-collapse.show" href="../user/index.php">Login</a>';
           }
           ?>
         </li>
         <li class="nav-item">
-          <a class="btn btn-tertiary card" data-bs-target=".navbar-collapse.show" href="/animals/index.php">Animals</a>
+          <a class="btn btn-tertiary card" data-bs-target=".navbar-collapse.show" href="../animals/index.php">Animals</a>
         </li>
         <li class="nav-item">
           <?php if ($_SESSION["logedin"] == "admin") {
-            echo '<a class="btn btn-tertiary card" data-bs-target=".navbar-collapse.show" href="/animals/create.php">New Animal</a>';
+            echo '<a class="btn btn-tertiary card" data-bs-target=".navbar-collapse.show" href="../animals/create.php">New Animal</a>';
           } ?>
         </li>
         <!-- <li class="nav-item">
@@ -53,7 +53,7 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
-              <a class="dropdown-item d-flex align-items-center justify-content-between active" aria-current="true" href="/animals/index.php">
+              <a class="dropdown-item d-flex align-items-center justify-content-between active" aria-current="true" href="../animals/index.php">
                 All
                 <!-- <svg class="bi">
                   <use xlink:href="#check2"></use>
@@ -68,18 +68,18 @@
               <h6 class="dropdown-header">Select</h6> -->
         </li>
 
-        <li><a class="dropdown-item" href="/animals/senior.php">Adult</a></li>
-        <li><a class="dropdown-item" href="/animals/junior.php">Junior</a></li>
+        <li><a class="dropdown-item" href="../animals/senior.php">Adult</a></li>
+        <li><a class="dropdown-item" href="../animals/junior.php">Junior</a></li>
         <li>
           <hr class="dropdown-divider">
         </li>
-        <li><a class="dropdown-item" href="/animals/small.php">Small</a></li>
-        <li><a class="dropdown-item" href="/animals/large.php">Large</a></li>
+        <li><a class="dropdown-item" href="../animals/small.php">Small</a></li>
+        <li><a class="dropdown-item" href="../animals/large.php">Large</a></li>
         <li>
           <hr class="dropdown-divider">
         </li>
-        <li><a class="dropdown-item" href="/animals/adopted.php">Adopted</a></li>
-        <li><a class="dropdown-item" href="/animals/notadopted.php">Available</a></li>
+        <li><a class="dropdown-item" href="../animals/adopted.php">Adopted</a></li>
+        <li><a class="dropdown-item" href="../animals/notadopted.php">Available</a></li>
       </ul>
       </li>
 

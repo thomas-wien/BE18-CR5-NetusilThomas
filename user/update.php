@@ -79,7 +79,7 @@ $mysqli->close();
         <p><?php echo ($uploadError) ?? ''; ?></p>
     </div>
     <h2>Update</h2>
-    <img class='img-thumbnail rounded-circle' src='/pictures/<?php echo $data['image'] ?>' alt="<?php echo $firstname ?>">
+    <img class='img-thumbnail rounded-circle' src='../pictures/<?php echo $data['image'] ?>' alt="<?php echo $firstname ?>">
     <form method="post" enctype="multipart/form-data">
         <table class="table">
             <tr>

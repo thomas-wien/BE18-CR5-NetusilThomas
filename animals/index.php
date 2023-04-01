@@ -16,7 +16,7 @@ if ($result->num_rows > 0) {
     $tbody .= " <div>
         <div class='card p-3 mb-5'>
           <div class='card-img-body'>
-            <a href='details.php?id=" . $row['id'] . "'><img class='img-thumbnail img-fluid overflow-hidden w-100' data-bs-toggle='modal' data-bs-target='#exampleModal' src='/pictures/" . $row['picture'] . "' height='450px' alt=" . normalize($row['animal_name']) . "></a>
+            <a href='details.php?id=" . $row['id'] . "'><img class='img-thumbnail img-fluid overflow-hidden w-100' data-bs-toggle='modal' data-bs-target='#exampleModal' src='../pictures/" . $row['picture'] . "' height='450px' alt=" . normalize($row['animal_name']) . "></a>
           </div>
           <div class='card-body'>
             <h4 class='card-title'>" . $row['breed'] . "</h4>

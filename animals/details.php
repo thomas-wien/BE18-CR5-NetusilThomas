@@ -38,7 +38,7 @@ if ($_GET['id']) {
     <div class='card'>
         <div class='row'>
             <div class='col-sm-5 col-md-4'>
-                <img class='card-img img-fluid rounded-start p-2' src='/pictures/<?= $picture ?>' alt=<?= $animal_name ?>>
+                <img class='card-img img-fluid rounded-start p-2' src='../pictures/<?= $picture ?>' alt=<?= $animal_name ?>>
                 <?php if ($_SESSION["logedin"] == "admin") {
                     echo "<div class='card-footer text-center mx-auto space-around w-100'>
                     <a class='col-4 p-2 ms-3 btn btn-secondary btn-sm w-25 text-white' href='index.php'>Home</a>

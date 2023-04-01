@@ -52,7 +52,7 @@ $mysqli->close();
     <p><?php echo ($message) ?? ''; ?></p>
 </div>
 <fieldset>
-    <legend class='h2 mb-3'>Delete request <img class='img-thumbnail userPortrait rounded-circle' src='/pictures/<?php echo $picture ?>' alt="<?php echo $firstname ?>"></legend>
+    <legend class='h2 mb-3'>Delete request <img class='img-thumbnail userPortrait rounded-circle' src='../pictures/<?php echo $picture ?>' alt="<?php echo $firstname ?>"></legend>
     <h5>You have selected the data below:</h5>
     <table class="table w-75 mt-3">
         <tr>
