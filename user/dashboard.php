@@ -42,7 +42,7 @@ $mysqli->close();
 <div class="container">
     <div class="row">
         <div class="col-2">
-            <img class="userImg center mx-auto d-block my-3" src="/pictures/admavatar.png" alt="Adm avatar">
+            <img class="userImg center mx-auto d-block my-3" src="../pictures/admavatar.png" alt="Adm avatar">
             <p class="text-tertiary-emphasis fs-4 my-2 text-center">Admin Panel</p>
             <a class="btn btn-secondary card" href="../animals/index.php">Animals</a>
             <a class="btn btn-secondary my-3  card" href="register.php">Add User</a>

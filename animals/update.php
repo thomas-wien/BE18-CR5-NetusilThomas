@@ -47,7 +47,7 @@ if ($_GET['id']) {
 		<div class="row mx-auto needs-validation" novalidate style="width: 80%;">
 			<div class="card p-3 mb-5 bg-secondary bg-gradient">
 				<div class="card-img-body">
-					<img class="card-img w-25 mx-auto" data-bs-toggle="modal" data-bs-target="#exampleModal" src="/pictures/<?= $picture ?>" alt="<?= normalize($animal_name) ?>">
+					<img class="card-img w-25 mx-auto" data-bs-toggle="modal" data-bs-target="#exampleModal" src="../pictures/<?= $picture ?>" alt="<?= normalize($animal_name) ?>">
 					<input type="file" class="form-control" name="picture" placeholder="Please choose a picture...">
 				</div>
 				<div class="card-body">

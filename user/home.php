@@ -35,7 +35,7 @@ $mysqli->close();
 <div class="container">
     <div class="row">
         <div class="col-2">
-            <img class="userImg center mx-auto d-block my-3" src="/pictures/<?= $UserImg ?>">
+            <img class="userImg center mx-auto d-block my-3" src="../pictures/<?= $UserImg ?>">
 
             <a class="btn btn-danger card" href="logout.php?logout">Sign Out</a>
 
