@@ -20,7 +20,7 @@ function head($titel = " | Thomas ")
       <meta name="description" content="CodeReview 4">
       <title>Adopt a Pet' . $titel . '</title>
       <link href="../favicon.ico" rel="icon">
-      <script src="/js/darkLight.js" defer></script>
+      <script src="../js/darkLight.js" defer></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous" defer></script>
 
     </head>
