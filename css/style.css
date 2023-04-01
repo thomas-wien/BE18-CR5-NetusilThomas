@@ -1,0 +1,43 @@
+.card {
+  -webkit-box-shadow: 4px 1px 14px 0px rgba(0, 0, 0, 0.82);
+  box-shadow: 4px 1px 14px 0px rgba(0, 0, 0, 0.82) !important;
+}
+
+.banner-image {
+  background-image: url("../assets/images/heroImage.jpg");
+  background-size: cover;
+}
+
+.userImage {
+  width: 200px;
+  height: 200px;
+}
+
+.userPortrait {
+  width: auto;
+  height: 150px;
+  -webkit-box-shadow: 4px 1px 14px 0px rgba(0, 0, 0, 0.82);
+  box-shadow: 4px 1px 14px 0px rgba(0, 0, 0, 0.82) !important;
+}
+
+.userImg {
+  width: 150px;
+  height: 150px;
+  -webkit-box-shadow: 4px 1px 14px 0px rgba(0, 0, 0, 0.82);
+  box-shadow: 4px 1px 14px 0px rgba(0, 0, 0, 0.82) !important;
+}
+
+fieldset {
+  margin: auto;
+  margin-top: 100px;
+  width: 60%;
+}
+
+td {
+  text-align: left;
+  vertical-align: middle;
+}
+
+tr {
+  text-align: center;
+}
