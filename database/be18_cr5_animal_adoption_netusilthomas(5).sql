@@ -228,13 +228,6 @@ ALTER TABLE `addresses`
   ADD CONSTRAINT `addresses_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints der Tabelle `adoptions`
---
-ALTER TABLE `adoptions`
-  ADD CONSTRAINT `adoptions_ibfk_1` FOREIGN KEY (`fk_animal_id`) REFERENCES `animal` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `adoptions_ibfk_2` FOREIGN KEY (`fk_user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Constraints der Tabelle `animal`
 --
 ALTER TABLE `animal`
