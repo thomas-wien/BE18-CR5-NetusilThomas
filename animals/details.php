@@ -20,6 +20,7 @@ if ($_GET['id']) {
         $available = normalize($data['available']);
         $picture = $data['picture'];
         $Animaldeleted = normalize($data['deleted']);
+        $lives_in = normalize($data['lives_in']);
     } else {
         header("location: error.php");
     }
@@ -65,6 +66,7 @@ if ($_GET['id']) {
                             <p class='card-text'>Type: <?= normalize($animal_type) ?></p>
                             <p class='card-text'>Breed: <?= normalize($breed) ?></p>
                             <p class='card-text'>Vacccines: <?= normalize($vaccines) ?></p>
+                            <p class='card-text'>Lives in: <?= normalize($lives_in) ?></p>
                             <p class='card-text'>Adopted: <?= normalize($adoption_date) ?></p>
                             <p class='card-text'>Animal is <?= ($available == 'no') ? 'Adopted' : 'Available'; ?></p>
                 </div>
