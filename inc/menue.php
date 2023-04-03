@@ -14,21 +14,22 @@
   </symbol>
 </svg>
 
-<!-- with hero image -->
-<!-- <nav class="navbar fixed-top navbar-expand-sm navbar-dark p-md-3"> -->
-<!--without hero image -->
+<!-- Navbar starts here -->
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top p-md-2 bg-opacity-75 shadow">
-  <!-- <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-md-2 shadow"> -->
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink=""><img src="../assets/images/logo.jpg" height="50px" alt="Adopt a Pet"> Adopt a Pet</a>
+    <a class="navbar-brand" href="../animals/index.php"><img src="../assets/images/logo.jpg" height="50px" alt="Adopt a Pet"> Adopt a Pet</a>
+    <!-- Button for small devices -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <!-- Login Button -->
     <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- For alligning the rest of the menue to the right -->
       <div class="mx-auto"></div>
+
       <ul class="navbar-nav opacity-75">
         <li class="nav-item">
+          <!-- if you are loged in as a User -->
           <?php if ($_SESSION["username"] != "") {
             echo '<a class="btn btn-link nav-link card" type="button" data-bs-target=".navbar-collapse.show" href="../user/home.php?">Your Account ' . $_SESSION["username"] . '</a>';
           } else {
@@ -36,15 +37,14 @@
           }
           ?>
         </li>
-        <!-- <li class="nav-item">
-          <a class="btn btn-tertiary card" data-bs-target=".navbar-collapse.show" href="../animals/index.php">Animals</a>
-        </li> -->
+        <!-- if you are an admin you can add animals -->
         <li class="nav-item">
           <?php if ($_SESSION["logedin"] == "admin") {
             echo '<a class="btn btn-link nav-link card mx-3" data-bs-target=".navbar-collapse.show" href="../animals/create.php">New Animal</a>';
           } ?>
         </li>
 
+        <!-- the animal selectin starts here -->
         <li class="nav-item dropdown">
           <button type="button" class="btn btn-link nav-link card py-2 ms-3 dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
             <span class="d-lg-none" aria-hidden="true"></span><span class="visually-hidden"></span> Animal Filter <span class="visually-hidden"></span>
@@ -58,14 +58,7 @@
                 </svg> -->
               </a>
             </li>
-
-            <!-- <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li>
-              <h6 class="dropdown-header">Select</h6> -->
         </li>
-
         <li><a class="dropdown-item" href="../animals/index.php?filter=senior">Adult</a></li>
         <li><a class="dropdown-item" href="../animals/index.php?filter=junior">Junior</a></li>
         <li>
@@ -81,8 +74,8 @@
       </ul>
       </li>
 
+      <!-- light dark mode selectio starts here -->
       <li class="nav-item dropdown">
-
         <button class="btn btn-link nav-link card py-2 px-2 ms-3 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (auto)">
           <svg class="bi my-1 theme-icon-active">
             <use href="#circle-half"></use>
