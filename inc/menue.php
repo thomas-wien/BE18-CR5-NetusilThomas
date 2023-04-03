@@ -24,31 +24,29 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <!-- Login Button -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <div class="mx-auto"></div>
-      <ul class="navbar-nav">
+      <ul class="navbar-nav opacity-75">
         <li class="nav-item">
           <?php if ($_SESSION["username"] != "") {
-            echo '<a class="btn btn-tertiary card" type="button" data-bs-target=".navbar-collapse.show" href="../user/home.php?">Your Account ' . $_SESSION["username"] . '</a>';
+            echo '<a class="btn btn-link nav-link card" type="button" data-bs-target=".navbar-collapse.show" href="../user/home.php?">Your Account ' . $_SESSION["username"] . '</a>';
           } else {
-            echo '<a class="btn btn-tertiary card" type="button" data-bs-target=".navbar-collapse.show" href="../user/index.php">Login</a>';
+            echo '<a class="btn btn-link nav-link card" type="button" data-bs-target=".navbar-collapse.show" href="../user/index.php">Login</a>';
           }
           ?>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="btn btn-tertiary card" data-bs-target=".navbar-collapse.show" href="../animals/index.php">Animals</a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <?php if ($_SESSION["logedin"] == "admin") {
-            echo '<a class="btn btn-tertiary card" data-bs-target=".navbar-collapse.show" href="../animals/create.php">New Animal</a>';
+            echo '<a class="btn btn-link nav-link card mx-3" data-bs-target=".navbar-collapse.show" href="../animals/create.php">New Animal</a>';
           } ?>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" routerLink="/menu">Menu</a>
-        </li> -->
 
         <li class="nav-item dropdown">
-          <button type="button" class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
+          <button type="button" class="btn btn-link nav-link card py-2 ms-3 dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
             <span class="d-lg-none" aria-hidden="true"></span><span class="visually-hidden"></span> Animal Filter <span class="visually-hidden"></span>
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
@@ -68,28 +66,28 @@
               <h6 class="dropdown-header">Select</h6> -->
         </li>
 
-        <li><a class="dropdown-item" href="../animals/senior.php">Adult</a></li>
-        <li><a class="dropdown-item" href="../animals/junior.php">Junior</a></li>
+        <li><a class="dropdown-item" href="../animals/index.php?filter=senior">Adult</a></li>
+        <li><a class="dropdown-item" href="../animals/index.php?filter=junior">Junior</a></li>
         <li>
           <hr class="dropdown-divider">
         </li>
-        <li><a class="dropdown-item" href="../animals/small.php">Small</a></li>
-        <li><a class="dropdown-item" href="../animals/large.php">Large</a></li>
+        <li><a class="dropdown-item" href="../animals/index.php?filter=small">Small</a></li>
+        <li><a class="dropdown-item" href="../animals/index.php?filter=large">Large</a></li>
         <li>
           <hr class="dropdown-divider">
         </li>
-        <li><a class="dropdown-item" href="../animals/adopted.php">Adopted</a></li>
-        <li><a class="dropdown-item" href="../animals/notadopted.php">Available</a></li>
+        <li><a class="dropdown-item" href="../animals/index.php?filter=adopted">Adopted</a></li>
+        <li><a class="dropdown-item" href="../animals/index.php?filter=notadopted">Available</a></li>
       </ul>
       </li>
 
       <li class="nav-item dropdown">
 
-        <button class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (auto)">
+        <button class="btn btn-link nav-link card py-2 px-2 ms-3 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (auto)">
           <svg class="bi my-1 theme-icon-active">
             <use href="#circle-half"></use>
           </svg>
-          <span class="d-lg-none ms-2" id="bd-theme-text">Toggle theme</span>
+          <span class="d-lg-none ms-2" id="bd-theme-text"></span>
         </button>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme-text">
           <li>

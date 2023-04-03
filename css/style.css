@@ -41,3 +41,11 @@ td {
 tr {
   text-align: center;
 }
+
+
+.adoptedImg {
+  width: auto;
+  height: 100px;
+  -webkit-box-shadow: 4px 1px 14px 0px rgba(0, 0, 0, 0.82);
+  box-shadow: 4px 1px 14px 0px rgba(0, 0, 0, 0.82) !important;
+}

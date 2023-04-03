@@ -17,7 +17,7 @@ $tbody = '';
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
         $tbody .= "<tr>
-            <td><img class='img-thumbnail userPortrait rounded-circle' src='../pictures/" . $row['picture'] . "' alt=" . $row['firstname'] . "></td>
+            <td><img class='img-thumbnail adoptedImg rounded-circle' src='../pictures/" . $row['picture'] . "' alt=" . $row['firstname'] . "></td>
             <td>" . $row['animal_name'] . "</td>
             <td>" . $row['breed'] . "</td>
             <td>" . substr($row['short_description'], 0, 245) . "....</td>
