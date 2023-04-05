@@ -3,11 +3,6 @@ session_start();
 
 include '../inc/htmlhelper.php';
 
-// if (isset($_SESSION['user']) != "") {
-//     header("Location: index.php");
-//     exit;
-// }
-
 head(" | Create Animal"); ?>
 
 <div class="container">

@@ -1,7 +1,5 @@
 <?php
 require_once '../../inc/db_connect.php';
-require_once '../../inc/file_upload.php';
-require_once '../../inc/normalize.php';
 require_once '../../inc/htmlhelper.php';
 
 if ($_POST) {

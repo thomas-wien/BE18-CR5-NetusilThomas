@@ -1,7 +1,6 @@
 <?php
 require_once '../inc/db_connect.php';
 require_once '../inc/htmlhelper.php';
-require_once '../inc/normalize.php';
 
 if ($_GET['id']) {
   $id = $_GET['id'];

@@ -1,6 +1,5 @@
 <?php
 require_once 'config.inc.php';
-require_once 'normalize.php';
 
 $_SESSION['username'] = (isset($_SESSION['username'])) ? normalize($_SESSION['username']) : "";
 $_SESSION['logedin'] = (isset($_SESSION['logedin'])) ? $_SESSION['logedin'] : "";
@@ -98,12 +97,123 @@ function logout()
   }
 }
 
+function file_upload($picture, $src = "animal")
+{
+  $result = new stdClass(); //this object will carry status from file upload
+  $result->fileName = 'avatar.png';
+
+  if ($src == "animal") {
+    $result->fileName = 'animal.jpg';
+  }
+
+  $result->error = 1; //it could also be a boolean true/false
+  //collect data from object $picture
+  $fileName = $picture["name"];
+  $fileType = $picture["type"];
+  $fileTmpName = $picture["tmp_name"];
+  $fileError = $picture["error"];
+  $fileSize = $picture["size"];
+  $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+  $filesAllowed = ["png", "jpg", "jpeg", "webp"];
+
+  // echo var_dump($picture);
+  // die();
+
+  if ($fileError == 4) {
+    $result->ErrorMessage = "No picture was chosen. It can always be updated later.";
+    return $result;
+  } else {
+    if (in_array($fileExtension, $filesAllowed)) {
+      if ($fileError === 0) {
+        if ($fileSize < 500000) { //500kb this number is in bytes
+          //it gives a file name based microseconds
+          $fileNewName = uniqid('') . "." . $fileExtension; // 1233343434.jpg i.e
+          $destination = "../pictures/$fileNewName";
+          // if ($src == "user") {
+          //     $destination = "../pictures/$fileNewName";
+          // }
+          if (move_uploaded_file($fileTmpName, $destination)) {
+            $result->error = 0;
+            $result->fileName = $fileNewName;
+            return $result;
+          } else {
+            $result->ErrorMessage = "There was an error uploading this file.";
+            return $result;
+          }
+        } else {
+          $result->ErrorMessage = "This picture is bigger than the allowed 500Kb. <br> Please choose a smaller one and Update your profile.";
+          return $result;
+        }
+      } else {
+        $result->ErrorMessage = "There was an error uploading - $fileError code. Check php documentation.";
+        return $result;
+      }
+    } else {
+      $result->ErrorMessage = "This file type cant be uploaded.";
+      return $result;
+    }
+  }
+}
+
+// function file_upload(array $file, string $src = "animal"): array
+// {
+//   $result = [
+//     "error" => 1,
+//     "file_name" => "avatar.png",
+//     "error_message" => ""
+//   ];
+
+//   $allowed_extensions = ["png", "jpg", "jpeg", "webp"];
+//   $max_size = 500000; // 500kb
+
+//   if ($file["error"] == UPLOAD_ERR_NO_FILE) {
+//     $result["error_message"] = "No file was chosen. It can always be updated later.";
+//     return $result;
+//   }
+
+//   if (!in_array(pathinfo($file["name"], PATHINFO_EXTENSION), $allowed_extensions)) {
+//     $result["error_message"] = "This file type can't be uploaded.";
+//     return $result;
+//   }
+
+//   if ($file["error"] !== UPLOAD_ERR_OK) {
+//     $result["error_message"] = "There was an error uploading - {$file['error']} code. Check PHP documentation.";
+//     return $result;
+//   }
+
+//   if ($file["size"] > $max_size) {
+//     $result["error_message"] = "This file is bigger than the allowed 500KB. Please choose a smaller one and update your profile.";
+//     return $result;
+//   }
+
+//   $file_name = $src == "animal" ? "animal.jpg" : uniqid("") . "." . pathinfo($file["name"], PATHINFO_EXTENSION);
+//   $destination = "../pictures/$file_name";
+
+//   if (!move_uploaded_file($file["tmp_name"], $destination)) {
+//     $result["error_message"] = "There was an error uploading this file.";
+//     return $result;
+//   }
+
+//   $result["error"] = 0;
+//   $result["file_name"] = $file_name;
+
+//   return $result;
+// }
+
+function normalize($var)
+{
+  $var = trim($var);
+  $var = strip_tags($var);
+  $var = htmlspecialchars($var);
+  $var = mysqli_real_escape_string(getCon(), $var);
+  return $var;
+}
+
 function display_animals($query, $head)
 {
   session_start();
   require_once '../inc/db_connect.php';
   require_once '../inc/htmlhelper.php';
-  require_once '../inc/normalize.php';
 
   $result = $mysqli->query($query);
 

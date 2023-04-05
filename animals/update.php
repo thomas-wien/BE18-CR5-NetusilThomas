@@ -2,7 +2,6 @@
 session_start();
 require_once '../inc/db_connect.php';
 require_once '../inc/htmlhelper.php';
-require_once '../inc/normalize.php';
 
 isUser("index.php");
 // if (isset($_SESSION['user']) != "") {

@@ -2,12 +2,7 @@
 session_start();
 require_once '../inc/db_connect.php';
 require_once '../inc/htmlhelper.php';
-require_once '../inc/normalize.php';
 
-// if (isset($_SESSION['user']) != "") {
-//     header("Location: index.php");
-//     exit;
-// }
 isUser("index.php");
 
 if ($_GET['id']) {
