@@ -1,33 +1,34 @@
 <?php
 require_once 'config.inc.php';
 
-$_SESSION['username'] = (isset($_SESSION['username'])) ? normalize($_SESSION['username']) : "";
-$_SESSION['logedin'] = (isset($_SESSION['logedin'])) ? $_SESSION['logedin'] : "";
-$_SESSION['userid'] = (isset($_SESSION['userid'])) ? $_SESSION['userid'] : 0;
+// Check and normalize session variables
+$_SESSION['username'] = isset($_SESSION['username']) ? normalize($_SESSION['username']) : "";
+$_SESSION['logedin'] = isset($_SESSION['logedin']) ? $_SESSION['logedin'] : "";
+$_SESSION['userid'] = isset($_SESSION['userid']) ? $_SESSION['userid'] : 0;
 
-function head($titel = " | Thomas ")
+// Function for HTML header element
+function head($title = " | Thomas ")
 {
   echo '<!DOCTYPE html> 
   <html lang="en" data-bs-theme="auto">
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
       <link rel="stylesheet" type="text/css" href="../css/style.css">
       <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
       <meta name="author" content="Thomas Netusil">
       <meta name="description" content="CodeReview 4">
-      <title>Adopt a Pet' . $titel . '</title>
+      <title>Adopt a Pet' . $title . '</title>
       <link href="../favicon.ico" rel="icon">
       <script src="../js/darkLight.js" defer></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous" defer></script>
-
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" deferer></script>
     </head>
     <body>
     
-  <header class="position-relative">';
+    <header class="position-relative">';
 
-  include_once 'menue.php';
+    include_once 'menue.php';
 
   echo '<div style="height: 35vh" class="banner-image w-100 d-flex justify-content-center align-items-center pt-5"></div>
   <h1 class="vw-auto d-block display-5 position-absolute top-50 start-50 translate-middle text-center text-white bg-dark  bg-opacity-75 px-4 py-4">
@@ -35,6 +36,7 @@ function head($titel = " | Thomas ")
   </header>';
 }
 
+// Function for HTML footer element
 function htmlend()
 {
   echo ' <footer class="container-fluid mt-5 bg-dark text-white text-center ">
@@ -45,26 +47,30 @@ function htmlend()
   </html>';
 }
 
+// Function to establish a database connection
 function getCon()
 {
   $connect = new mysqli(HOST, USER, PASS, DB);
   return $connect;
 }
 
+// Function to check if a user is logged in
 function logged_in()
 {
   isUser();
   isAdmin();
 }
 
+// Function to check if a user is a regular user
 function isUser($locuser = 'home.php')
 {
-  if (isset($_SESSION['user']) != "") {
+  if (isset($_SESSION['user'])) {
     header("Location: $locuser");
     return true;
   }
 }
 
+// Function to check if a user is an administrator
 function isAdmin($locadmin = 'dashboard.php')
 {
   if (isset($_SESSION['admin'])) {
@@ -73,6 +79,7 @@ function isAdmin($locadmin = 'dashboard.php')
   }
 }
 
+// Function to check if a user is anonymous
 function isAnonym($locdef = 'index.php')
 {
   if (!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
@@ -82,6 +89,7 @@ function isAnonym($locdef = 'index.php')
   }
 }
 
+// Function to logout a user
 function logout()
 {
   isAnonym();
@@ -97,17 +105,19 @@ function logout()
   }
 }
 
+// Function for file upload
 function file_upload($picture, $src = "animal")
 {
-  $result = new stdClass(); //this object will carry status from file upload
+  $result = new stdClass(); // This object carries the status from file upload
   $result->fileName = 'avatar.png';
 
   if ($src == "animal") {
     $result->fileName = 'animal.jpg';
   }
 
-  $result->error = 1; //it could also be a boolean true/false
-  //collect data from object $picture
+  $result->error = 1; // It could also be a boolean true/false
+  
+  // Collect data from the $picture object
   $fileName = $picture["name"];
   $fileType = $picture["type"];
   $fileTmpName = $picture["tmp_name"];
@@ -116,22 +126,16 @@ function file_upload($picture, $src = "animal")
   $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
   $filesAllowed = ["png", "jpg", "jpeg", "webp"];
 
-  // echo var_dump($picture);
-  // die();
-
   if ($fileError == 4) {
     $result->ErrorMessage = "No picture was chosen. It can always be updated later.";
     return $result;
   } else {
     if (in_array($fileExtension, $filesAllowed)) {
       if ($fileError === 0) {
-        if ($fileSize < 500000) { //500kb this number is in bytes
-          //it gives a file name based microseconds
-          $fileNewName = uniqid('') . "." . $fileExtension; // 1233343434.jpg i.e
+        if ($fileSize < 500000) { // 500 KB, this number is in bytes
+          // Generate a file name based on microseconds
+          $fileNewName = uniqid('') . "." . $fileExtension; // e.g. 1233343434.jpg
           $destination = "../pictures/$fileNewName";
-          // if ($src == "user") {
-          //     $destination = "../pictures/$fileNewName";
-          // }
           if (move_uploaded_file($fileTmpName, $destination)) {
             $result->error = 0;
             $result->fileName = $fileNewName;
@@ -141,65 +145,21 @@ function file_upload($picture, $src = "animal")
             return $result;
           }
         } else {
-          $result->ErrorMessage = "This picture is bigger than the allowed 500Kb. <br> Please choose a smaller one and Update your profile.";
+          $result->ErrorMessage = "This picture is bigger than the allowed 500 KB. Please choose a smaller one and update your profile.";
           return $result;
         }
       } else {
-        $result->ErrorMessage = "There was an error uploading - $fileError code. Check php documentation.";
+        $result->ErrorMessage = "There was an error uploading - $fileError code. Check PHP documentation.";
         return $result;
       }
     } else {
-      $result->ErrorMessage = "This file type cant be uploaded.";
+      $result->ErrorMessage = "This file type can't be uploaded.";
       return $result;
     }
   }
 }
 
-// function file_upload(array $file, string $src = "animal"): array
-// {
-//   $result = [
-//     "error" => 1,
-//     "file_name" => "avatar.png",
-//     "error_message" => ""
-//   ];
-
-//   $allowed_extensions = ["png", "jpg", "jpeg", "webp"];
-//   $max_size = 500000; // 500kb
-
-//   if ($file["error"] == UPLOAD_ERR_NO_FILE) {
-//     $result["error_message"] = "No file was chosen. It can always be updated later.";
-//     return $result;
-//   }
-
-//   if (!in_array(pathinfo($file["name"], PATHINFO_EXTENSION), $allowed_extensions)) {
-//     $result["error_message"] = "This file type can't be uploaded.";
-//     return $result;
-//   }
-
-//   if ($file["error"] !== UPLOAD_ERR_OK) {
-//     $result["error_message"] = "There was an error uploading - {$file['error']} code. Check PHP documentation.";
-//     return $result;
-//   }
-
-//   if ($file["size"] > $max_size) {
-//     $result["error_message"] = "This file is bigger than the allowed 500KB. Please choose a smaller one and update your profile.";
-//     return $result;
-//   }
-
-//   $file_name = $src == "animal" ? "animal.jpg" : uniqid("") . "." . pathinfo($file["name"], PATHINFO_EXTENSION);
-//   $destination = "../pictures/$file_name";
-
-//   if (!move_uploaded_file($file["tmp_name"], $destination)) {
-//     $result["error_message"] = "There was an error uploading this file.";
-//     return $result;
-//   }
-
-//   $result["error"] = 0;
-//   $result["file_name"] = $file_name;
-
-//   return $result;
-// }
-
+// Function to normalize inputs
 function normalize($var)
 {
   $var = trim($var);
@@ -209,6 +169,7 @@ function normalize($var)
   return $var;
 }
 
+// Function to display animals
 function display_animals($query, $head)
 {
   session_start();
