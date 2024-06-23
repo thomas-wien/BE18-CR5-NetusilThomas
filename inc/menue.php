@@ -76,6 +76,7 @@
 
       <!-- light dark mode selectio starts here -->
       <li class="nav-item dropdown">
+
         <button class="btn btn-link nav-link card py-2 px-2 ms-3 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (auto)">
           <svg class="bi my-1 theme-icon-active">
             <use href="#circle-half"></use>

@@ -18,11 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Datenbank: `be18_cr5_animal_adoption_netusilthomas`
+-- Datenbank: `db12950890-thomas`
 --
-CREATE DATABASE IF NOT EXISTS `be18_cr5_animal_adoption_netusilthomas` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `be18_cr5_animal_adoption_netusilthomas`;
-
+CREATE DATABASE IF NOT EXISTS `db12950890-thomas` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `db12950890-thomas`;
 -- --------------------------------------------------------
 
 --
