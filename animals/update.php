@@ -11,9 +11,9 @@ isUser("index.php");
 
 if ($_GET['id']) {
 	$id = $_GET['id'];
-	$sql = "SELECT * FROM animal WHERE id = {$id}";
-	$result = $mysqli->query($sql);
-
+	$sql = "SELECT * FROM animal WHERE id = ?";
+	$stmt = queryDB($mysqli, $sql, array($id));
+	$result = $stmt->get_result();
 	if ($result->num_rows == 1) {
 		$data = $result->fetch_assoc();
 		$animal_name = normalize($data['animal_name']);
@@ -24,7 +24,7 @@ if ($_GET['id']) {
 		$vaccines = normalize($data['vaccines']);
 		$adoption_date = normalize($data['adoption_date']);
 		$adopted_from = normalize($data['adopted_from']);
-		$available = normalize($data['available']);
+		$available = $data['available'];
 		$picture = normalize($data['picture']);
 		$fk_created_by_user = normalize($data['fk_created_by_user']);
 	} else {

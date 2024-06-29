@@ -1,5 +1,5 @@
 <?php
-require_once 'config.inc.php';
+require_once 'db_connect.php';
 
 // Check and normalize session variables
 $_SESSION['username'] = isset($_SESSION['username']) ? normalize($_SESSION['username']) : "";
@@ -163,29 +163,41 @@ function file_upload($picture, $src = "animal")
 // Function to normalize inputs
 function normalize($var)
 {
-  $var = trim($var);
-  $var = strip_tags($var);
-  $var = htmlspecialchars($var);
-// $var = mysqli_real_escape_string(getCon(), $var);
-  return $var;
+    // Perform input validation
+    if (!is_string($var)) {
+        throw new InvalidArgumentException('Input must be a string');
+    }
+
+    // Perform input normalization
+    $var = trim($var);
+    $var = strip_tags($var);
+    $var = htmlspecialchars($var);
+
+    // Use dependency injection to get the DBConnection instance
+    $dbConnection = DBConnection::getInstance(HOST, USER, PASS, DB);
+    $var = mysqli_real_escape_string($dbConnection->getMysqli(), $var);
+
+    return $var;
 }
 
 // Function to display animals
 function display_animals($query, $head)
 {
-  session_start();
-  require_once '../inc/db_connect.php';
-  require_once '../inc/htmlhelper.php';
+    session_start();
+    require_once '../inc/db_connect.php';
+    // require_once '../inc/htmlhelper.php';
 
-  $result = getCon()->query($query);
+    $dbConnection = DBConnection::getInstance(HOST, USER, PASS, DB);
+    $stmt = $dbConnection->getMysqli()->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-  $tbody = '';
+    $tbody = '';
 
-  if ($result->num_rows > 0) {
-    $result->fetch_array(MYSQLI_ASSOC);
-    while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-      $tbody .= " <div>
-          <div class='card p-3 mb-5'>
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $tbody .= "<div>
+                <div class='card p-3 mb-5'>
             <div class='card-img-body'>
               <a href='details.php?id=" . $row['id'] . "'><img class='img-thumbnail img-fluid overflow-hidden w-100' data-bs-toggle='modal' data-bs-target='#exampleModal' src='../pictures/" . $row['picture'] . "' height='450px' alt=" . normalize($row['animal_name']) . "></a>
             </div>
@@ -220,14 +232,16 @@ function display_animals($query, $head)
       }
       $tbody .= "
           </div>
-        </div>";
-    };
-  } else {
-    $tbody =  "<tr><td colspan='10'><center>No Data Available </center></td></tr>";
-  }
-  $mysqli->close();
+            </div>";
+        }
+    } else {
+        // Handle case where no results are found
+        $tbody = "<p>No animals found.</p>";
+    }
+  ?>
 
-?>
+<!-- Here the page is created with the animals -->
+  
   <?php head(" | " . $head); ?>
 
   <div class="container">
@@ -245,4 +259,7 @@ function display_animals($query, $head)
   </div>
   </div>
 <?php htmlend();
+
+// return $tbody;
+
 }

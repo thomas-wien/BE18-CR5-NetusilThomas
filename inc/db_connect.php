@@ -3,6 +3,7 @@
 // Defining Constants to use a function also
 require_once 'config.inc.php';
 
+
 /**
  * Establishes a database connection using the provided host, user, password, and database name.
  *
@@ -31,14 +32,14 @@ $mysqli = getDBConnection(HOST, USER, PASS, DB);
  * @throws Exception If the query fails.
  * @return mysqli_result The result of the query.
  */
-function queryDB($mysqli, $query) {
-    $result = mysqli_query($mysqli, $query);
-    if (!$result) {
-        throw new Exception("Query failed: " . mysqli_error($mysqli));
-    }
+// function queryDB($mysqli, $query) {
+//     $result = mysqli_query($mysqli, $query);
+//     if (!$result) {
+//         throw new Exception("Query failed: " . mysqli_error($mysqli));
+//     }
 
-    return $result;
-}
+//     return $result;
+// }
 
 function closeDBConnection($mysqli) {
     mysqli_close($mysqli);
@@ -90,6 +91,15 @@ class DBConnection {
     }
 
     /**
+     * Returns the mysqli object representing the database connection.
+     *
+     * @return mysqli The mysqli object representing the database connection.
+     */
+    public function getMysqli() {
+        return $this->mysqli;
+    }
+
+    /**
      * Executes a SQL query on the database using the provided query string.
      *
      * @param string $query The SQL query to execute.
@@ -102,6 +112,34 @@ class DBConnection {
             throw new Exception("Query failed: " . mysqli_error($this->mysqli));
         }
         return $result;
+    }
+
+/**
+     * Executes a SQL query on the database using the provided query string.
+     *
+     * @param string $query The SQL query to execute.
+     * @param array $params The parameters to bind to the query.
+     * @throws Exception If the query fails.
+     * @return mysqli_stmt The prepared statement representing the query.
+     */
+    public function queryDB($query, $params = []) {
+        $mysqli = $this->getMysqli();
+    
+        $stmt = $mysqli->prepare($query);
+        if ($stmt === false) {
+            throw new Exception("Prepare failed: " . $mysqli->error);
+        }
+    
+        if (!empty($params)) {
+            $types = str_repeat('s', count($params));
+            $stmt->bind_param($types, ...$params);
+        }
+    
+        if (!$stmt->execute()) {
+            throw new Exception("Execute failed: " . $stmt->error);
+        }
+    
+        return $stmt;
     }
 
     public function close() {

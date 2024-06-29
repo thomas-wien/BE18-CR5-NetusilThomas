@@ -20,7 +20,7 @@ if ($_GET['id']) {
         $adoption_date = $data['adoption_date'];
         $available = normalize($data['available']);
         $picture = $data['picture'];
-        $Animaldeleted = normalize($data['Animaldeleted']);
+        $Animaldeleted = $data['Animaldeleted'];
     } else {
         header("location: error.php");
     }

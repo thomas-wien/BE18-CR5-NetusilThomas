@@ -4,8 +4,9 @@ require_once '../inc/htmlhelper.php';
 
 if ($_GET['id']) {
   $id = $_GET['id'];
-  $sql = "SELECT * FROM animal WHERE breed = (SELECT breed FROM animal WHERE id = {$id})";
-  $result = $mysqli->query($sql);
+  $sql = "SELECT * FROM animal WHERE breed = (SELECT breed FROM animal WHERE id = ?)";
+  $stmt = queryDB($mysqli, $sql, array($id));
+  $result = $stmt->get_result();
   $tbody = '';
   if ($result->num_rows > 0) {
     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
